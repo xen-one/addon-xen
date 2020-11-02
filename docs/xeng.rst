@@ -59,25 +59,33 @@ If you want to follow the process manually without installing the package, you w
 OpenNebula Configuration
 ------------------------
 
-OpenNebula needs to know if it is going to use the XEN Driver. There are two sets of Xen VMM drivers, one for Xen version 3.x and other for 4.x, you will have to uncomment the version you will need. To achieve this for Xen version 4.x, uncomment these drivers in :ref:`/etc/one/oned.conf <oned_conf>`:
+OpenNebula needs to know if it is going to use the XEN Driver. 
+You will have to add the following to :ref:`/etc/one/oned.conf`:
 
 .. code::
 
-        IM_MAD = [
-            name       = "xen",
-            executable = "one_im_ssh",
-            arguments  = "-r 3 -t 15 xen" ]
+   VM_MAD = [ 
+      name       = "xen", 
+      executable = "one_vmm_exec", 
+      arguments  = "-t 15 -r 0 xen", 
+      default    = "vmm_exec/vmm_exec_xen.conf", 
+      type       = "xen", 
+      imported_vms_actions = "shutdown, shutdown-hard, hold, release, suspend, 
+         resume, delete, reboot, reboot-hard, resched, unresched, disk-attach, 
+         disk-detach, nic-attach, nic-detach, snap-create, snap-delete" 
+   ] 
 
-        VM_MAD = [
-           name       = "xen",
-           executable = "one_vmm_exec",
-           arguments  = "-t 15 -r 0 xen",
-           default    = "vmm_exec/vmm_exec_xen.conf",
-           type       = "xen",
-           imported_vms_actions = "shutdown, shutdown-hard, hold, release, suspend,
-               resume, delete, reboot, reboot-hard, resched, unresched, disk-attach,
-               disk-detach, nic-attach, nic-detach, snap-create, snap-delete"
-        ]
+You will have to add the following to :ref:`/etc/one/monitord.conf`:
+
+.. code::
+   IM_MAD = [
+      NAME          = "xen",
+      SUNSTONE_NAME = "XEN",
+      EXECUTABLE    = "one_im_ssh",
+      ARGUMENTS     = "-r 3 -t 15 -w 90 xen",
+      THREADS       = 0
+   ]
+
 
 Usage
 =====
@@ -88,8 +96,6 @@ To add a Xen host to OpenNebula you will need to add the Xen Drivers to the conf
 
     onehost <the_xen_host> -i xen -v xen
 
-    # or for OpenNebula < 5.0
-    onehost <the_xen_host> -i xen -v xen -n <net_driver>
 
 The following are template attributes specific to Xen, please refer to the :ref:`template reference documentation <template>` for a complete list of the attributes supported to define a VM.
 

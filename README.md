@@ -5,9 +5,13 @@
 The [XEN hypervisor](http://www.xen.org) offers a powerful, efficient and secure feature set for virtualization of x86, IA64, PowerPC and other CPU architectures. It delivers both paravirtualization and full virtualization. This guide describes the use of Xen with OpenNebula, please refer to the Xen specific documentation for further information on the setup of the Xen hypervisor itself.
 
 This addon is compatible **only** with Xen 4. Xen 3 has been deprecated in OpenNebula.
+It has been tested **only** with Xen 4.11.4
 
 ## Authors
 
+* Hans P. Reiser
+*
+* based on prior work for older OpenNebula versions and for KVM by:
 * Leader: [Héctor San Juan](https://github.com/hsanjuan)
 * [OpenNebula Core Team](https://github.com/OpenNebula)
 
@@ -22,9 +26,7 @@ This add-on is compatible with:
 
 | OpenNebula Version |
 | ------------------ |
-| 5.0                |
-| 4.14.2             |
-| 4.10, 4.12         |
+| 5.12               |
 
 ## Installation
 

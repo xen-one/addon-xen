@@ -126,6 +126,7 @@ cd `dirname $0`/src
 
 copy_files "im/xen.d/*" "$REMOTES_LOCATION/im/xen.d"
 copy_files "im/xen-probes.d/*" "$REMOTES_LOCATION/im/xen-probes.d"
+copy_files "im/lib/xen.rb" "$REMOTES_LOCATION/im/lib"
 copy_files "vmm/*" "$REMOTES_LOCATION/vmm/xen"
 copy_files "vnm/*" "$REMOTES_LOCATION/vnm/vnmmad-load.d"
 
